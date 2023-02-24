@@ -43,7 +43,6 @@ function App() {
   const nav = PersistentDrawerLeft(main);
 
   checkLogin(loggedIn, login);
-  ``;
 
   return <div className="App">{nav}</div>;
 }
