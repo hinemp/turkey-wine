@@ -28,6 +28,8 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
   open?: boolean;
 }>(({ theme, open }) => ({
   flexGrow: 1,
+  flex: 1,
+  flexDirection: "column",
   padding: theme.spacing(3),
   transition: theme.transitions.create("margin", {
     easing: theme.transitions.easing.sharp,
@@ -73,7 +75,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-export const PersistentDrawerLeft = (component: JSX.Element) => {
+export const PersistentDrawerLeft = (mainContent: JSX.Element) => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -90,7 +92,7 @@ export const PersistentDrawerLeft = (component: JSX.Element) => {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="sticky" open={open}>
+      <AppBar position="fixed" open={open}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -142,7 +144,10 @@ export const PersistentDrawerLeft = (component: JSX.Element) => {
           ))}
         </List>
       </Drawer>
-      <Main open={open}>{component}</Main>
+      <Main open={open} sx={{ justifyContent: "center", flex: 1 }}>
+        <DrawerHeader />
+        {mainContent}
+      </Main>
     </Box>
   );
 };

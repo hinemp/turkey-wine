@@ -71,8 +71,7 @@ const reducer = (state: State, action: Action): State => {
   }
 };
 
-export const Login = ({}) => {
-  // const classes = useStyles();
+export const Login = (setLoggedIn: (loggedIn: boolean) => void) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
@@ -95,6 +94,7 @@ export const Login = ({}) => {
         type: "loginSuccess",
         payload: "Login Successfully",
       });
+      setLoggedIn(true);
     } else {
       dispatch({
         type: "loginFailed",
@@ -104,7 +104,7 @@ export const Login = ({}) => {
   };
 
   const handleKeyPress = (event: React.KeyboardEvent) => {
-    if (event.keyCode === 13 || event.which === 13) {
+    if (event.key === "Insert") {
       state.isButtonDisabled || handleLogin();
     }
   };
@@ -129,7 +129,7 @@ export const Login = ({}) => {
 
   return (
     <form noValidate autoComplete="off">
-      <Card sx={{ width: "350px" }}>
+      <Card sx={{ width: "350px", margin: "auto" }}>
         <CardHeader title="Login App" />
         <CardContent>
           <div>
